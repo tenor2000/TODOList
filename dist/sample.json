@@ -1,0 +1,60 @@
+{
+    "Schoolwork": [
+        {
+            "id": 1,
+            "task": "Log In",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "High",
+            "notes": "",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "task": "TODO List assignment",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "",
+            "notes": "",
+            "completed": false
+        },
+        {
+            "id": 3,
+            "task": "Log out",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "",
+            "notes": "",
+            "completed": false
+        }
+    ],
+    "Family": [
+        {
+            "id": 1,
+            "task": "Pet the kitten",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "",
+            "notes": "",
+            "completed": false
+        },
+        {
+            "id": 2,
+            "task": "Make Dinner",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "",
+            "notes": "",
+            "completed": false
+        },
+        {
+            "id": 3,
+            "task": "Put kids to bed",
+            "description": "Lorum Ipsum...",
+            "dueDate": "02/29/2024",
+            "priority": "",
+            "notes": "",
+            "completed": false
+        }
+    ]
+}
