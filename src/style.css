@@ -11,7 +11,7 @@ body {
     background: var(--content-bgcolor);
     display: grid;
     grid-template-columns: 250px 2fr;
-    grid-template-rows: 60px 1fr;
+    grid-template-rows: 60px 30px 1fr;
     height: 100vh;
     margin: 0;
 }
@@ -22,6 +22,10 @@ header {
     grid-column: 1 / 3;
 }
 
+ul {
+    padding-left: 10px;
+}
+
 .spacer {
     height: 10px;
     background-color: #ccc
@@ -29,15 +33,24 @@ header {
 
 .sidebar {
     grid-column: 1 / 2;
+    grid-row: 2 / 4;
     background-color: var(--accent-bgcolor);
     color: #fff;
     font-size: large;
 }
 
-.sidebar-task, .sidebar-list, .sidebar-nav {
+.sidebar-nav {
     color: #fff;
     margin-left: 5px;
     padding-left: 10px;
+    border-radius: 8px;
+    transition: 1s;
+}
+
+.sidebar-task {
+    color: #fff;
+    margin-left: 10px;
+    padding-left: 20px;
     list-style-type: none;
     border-radius: 8px;
     transition: 1s;
@@ -49,12 +62,12 @@ header {
     color: #fff;
     background-color: var(--accent-bgcolor);
     font-size: large;
-    margin-left: 10px;
+    width: 80%;
     padding: 10px;
     transition: 1s;
 }
 
-.sidebar-task:hover, .sidebar-nav:hover, .new-project-btn:hover {
+.sidebar-nav:hover, .sidebar-task:hover, .new-project-btn:hover {
     background-color: var(--accent-highlight);
     transition: .3s;
     cursor: pointer;
@@ -62,6 +75,85 @@ header {
 
 .content {
     grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    grid-row: 3 / 4;
 }
 
+.task-card, .task-list-item {
+    margin: 5px;
+    border: 3px solid black;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.menu-container {
+    position: relative;
+    display: inline-block;
+    background-color: var(--accent-bgcolor);
+}
+    
+.menu-content {
+    display: none;
+    position: absolute;
+    color: #fff;
+    background-color: var(--accent-bgcolor);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    z-index: 1;
+}
+  
+.menu-content a {
+    display: block;
+    color: #333;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.menu-button {
+    background-color: var(--accent-bgcolor);
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: #fff;
+}
+  
+.menu-button:hover .menu-content {
+    display: block;
+}
+
+/* Creation Modal */
+#modal-dialog {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px 5px 20px 5px;
+    border: 2px solid black;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+  

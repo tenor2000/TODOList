@@ -1,7 +1,6 @@
 const FrontPage = {
     init() {
       this.layout();
-      // this.addEventListeners();
     },
     layout() {
       const content = document.querySelector('.content')

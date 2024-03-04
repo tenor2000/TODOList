@@ -45,7 +45,7 @@
             "dueDate": "02/29/2024",
             "priority": "",
             "notes": "",
-            "completed": false
+            "completed": true
         },
         {
             "id": 3,

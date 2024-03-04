@@ -1,67 +1,79 @@
 const TaskManager = {
-  init() {
-
-  },
-  async getTask(key, id) {
+  showTask(dataList, key, id) {
     try {
-      // Search JSON data for the specified key and ID
-      const foundItem = await this.searchJSON(key, id);
+      // sample JSON starts index 1
+      const item = dataList[key].find(task => task.id === id);
+      this.createBanner('task', item.task)
 
       // Display information in a div
       const contentDiv = document.querySelector('.content');
-      if (foundItem) {
+      if (item) {
           // Create HTML content using the found item
-          const itemHTML = `<div>Task: ${foundItem.task}</div>
-                            <div>Description: ${foundItem.description}</div>
-                            <div>Due Date: ${foundItem.dueDate}</div>
-                            <div>Priority: ${foundItem.priority}</div>
-                            <div>Notes: ${foundItem.notes}</div>
-                            <div>Completed: ${foundItem.completed}</div>`;
+          const itemHTML = `<div class='task-card'>
+                              <div>Task: ${item.task}</div>
+                              <div>Description: ${item.description}</div>
+                              <div>Due Date: ${item.dueDate}</div>
+                              <div>Priority: ${item.priority}</div>
+                              <div>Notes: ${item.notes}</div>
+                              <div>Completed: ${item.completed}</div>
+                            </div>`;
 
-          // Set the HTML content in the contentDiv
-          contentDiv.innerHTML = itemHTML;
+          contentDiv.innerHTML += itemHTML;
       } else {
-          contentDiv.textContent = 'Item not found'; // Display message if item not found
+          contentDiv.textContent = 'Item not found';
       }
     } catch (error) {
       console.error('Error initializing TaskManager:', error);
     }
   },
-  async searchJSON(key, id) {
+  showProject(dataList, key) {
+    this.createBanner('project', key);
     try {
-        // Fetch JSON data from the server
-        const response = await fetch('./sample.json');
-        const data = await response.json();
+      const project = dataList[key];
+      const contentDiv = document.querySelector('.content');
 
-        // Check if the key exists in the JSON data
-        if (key in data) {
-            const items = data[key];
-            const result = items.find(item => item.id === id);
+      if (project) {
 
-            if (result) {
-                console.log('Item found:', result);
-                return result;
-            } 
-                console.log('Item not found with ID:', id);
-                return null;
-        } 
-            console.log('Key not found:', key);
-            return null;
+        project.forEach(item => {
+          const itemHTML = `<div class='task-list-item'>
+                        <input type="checkbox" id="check${item.id}" name="check${item.id}">
+                        <label for="check${item.id}">Done</label>
+                        <div>${item.task}</div>
+                        <div>Due Date: ${item.dueDate}</div>
+                        <div>Priority: ${item.priority}</div>
+                        <div>Completed: ${item.completed}</div>
+                      </div>`;
+          contentDiv.innerHTML += itemHTML;
+          
+          const checkbox = document.getElementById(`check${item.id}`);
+          checkbox.checked = item.completed;
+          });
+          
         
+      } else {
+        contentDiv.textContent = 'Item not found';
+      }
+
     } catch (error) {
-        console.error('Error fetching or parsing JSON:', error);
-        return null;
+      console.error('Error initializing TaskManager:', error);
     }
   },
-  showTask() {
-      const content = document.querySelector('content');
-      const titlebar = document.createElement('div');
-      titlebar.className = 'titlebar';
-      titlebar.textContent = 'Task Manager'
-
-      const taskContent = document.createElement('div');
-      taskContent.classList.add('task-view')
+  createBanner(type, text) {
+    const content = document.querySelector('.content')
+    const banner = document.createElement('h1');
+    if (type === 'task') {
+      banner.textContent = `Task Manager: ${text}`;
+    } else if (type === 'project') {
+      banner.textContent = `Project Manager: ${text}`;
+    } else {
+      banner.textContent = 'A Problem has occurred';
+    }
+    banner.classList.add('banner');
+    content.appendChild(banner);
   },
+  filterByDate() {
+    // WIP
+  }
 };
 
 export default TaskManager;
