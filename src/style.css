@@ -67,7 +67,7 @@ ul {
     transition: 1s;
 }
 
-.sidebar-nav:hover, .sidebar-task:hover, .new-project-btn:hover {
+.sidebar-nav:hover, .sidebar-task:hover, .new-project-btn:hover, .menu-button:hover {
     background-color: var(--accent-highlight);
     transition: .3s;
     cursor: pointer;
@@ -100,13 +100,6 @@ ul {
     padding: 8px 0;
     z-index: 1;
 }
-  
-.menu-content a {
-    display: block;
-    color: #333;
-    padding: 8px 16px;
-    text-decoration: none;
-}
 
 .menu-button {
     background-color: var(--accent-bgcolor);
@@ -114,10 +107,8 @@ ul {
     padding: 5px;
     cursor: pointer;
     color: #fff;
-}
-  
-.menu-button:hover .menu-content {
-    display: block;
+    border-radius: 16px;
+    transition: 1s;
 }
 
 /* Creation Modal */

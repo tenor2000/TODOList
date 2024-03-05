@@ -12,7 +12,7 @@ const TaskManager = {
           const itemHTML = `<div class='task-card'>
                               <div>Task: ${item.task}</div>
                               <div>Description: ${item.description}</div>
-                              <div>Due Date: ${item.dueDate}</div>
+                              <div>Due Date: ${item.deadline}</div>
                               <div>Priority: ${item.priority}</div>
                               <div>Notes: ${item.notes}</div>
                               <div>Completed: ${item.completed}</div>
@@ -39,7 +39,7 @@ const TaskManager = {
                         <input type="checkbox" id="check${item.id}" name="check${item.id}">
                         <label for="check${item.id}">Done</label>
                         <div>${item.task}</div>
-                        <div>Due Date: ${item.dueDate}</div>
+                        <div>Due Date: ${item.deadline}</div>
                         <div>Priority: ${item.priority}</div>
                         <div>Completed: ${item.completed}</div>
                       </div>`;

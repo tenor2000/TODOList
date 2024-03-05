@@ -3,9 +3,10 @@ import "./style.css";
 import FrontPage from './frontpage';
 import InboxPage from './inboxpage';
 import TaskManager from './viewtask';
-import { createProject, createTask } from './createnew';
+import { createProject, editProject, createTask, editTask } from './createnew';
 
-let currentProject = ''
+let currentProject = '';
+let currentTaskId = '';
 const userDataAddress = 'sample.json'
 
 const clearContent = function() {
@@ -119,24 +120,50 @@ const setup = {
     document.body.appendChild(content);
   },
   createMenuBar() {
-    const modal = document.getElementById('modal-dialog');
     const menuBar = document.createElement('div');
     menuBar.classList.add('menu-container');
     document.body.appendChild(menuBar)
+  },
+  updateMenuBar() {
+    const modal = document.getElementById('modal-dialog');
+    const menuBar = document.getElementsByClassName('menu-container')[0];
     if (currentProject !== '') {
       menuBar.innerHTML = `
-        <button class="menu-button" id='new-task-btn'>+ New Task</button>`
-      const newTaskBtn = document.getElementById('new-task-btn');
-      newTaskBtn.addEventListener('click', () => {
-        console.log('New Task Button Pressed')
+        <button class="menu-button" id='edit-project-btn'>Edit Project</button>
+        <button class="menu-button" id='new-task-btn'>+ Add Task</button>
+        <button class="menu-button" id='edit-task-btn'>Edit Task</button>
+        `
+      const editProjectBtn = document.getElementById('new-task-btn');
+      editProjectBtn.addEventListener('click', () => {
+        console.log('Edit Project Button Pressed')
         modal.showModal();
-        createTask();
+        clearContent()
+        editProject();
       });
+
+      const addTaskBtn = document.getElementById('new-task-btn');
+      addTaskBtn.addEventListener('click', () => {
+        console.log('Add Task Button Pressed')
+        modal.showModal();
+        createTask(currentProject);
+      });
+
+      const editTaskBtn = document.getElementById('edit-task-btn');
+      editTaskBtn.addEventListener('click', () => {
+        console.log('Edit Task Button Pressed')
+        modal.showModal();
+        const task = this.retrieveData(currentProject, currentTaskId)
+        editTask(currentProject, task);
+      });
+    } else {
+      menuBar.innerHTML = ''
     }
   },
   handleHeadingClick(text) {
     console.log('Heading clicked:', text);
     clearContent()
+    currentProject = ''
+    this.updateMenuBar()
     if (text === 'Home') {
       FrontPage.init();
     } else if (text === 'Inbox') {
@@ -151,15 +178,22 @@ const setup = {
     if (arguments.length === 1) {
       console.log('Project clicked:', `${projectName}`);
       currentProject = projectName;
+      currentTaskId = '';
       clearContent()
       TaskManager.showProject(this.dataList, projectName)
+      this.updateMenuBar()
     } else {
       console.log('Task clicked:', `${projectName}, ${task.id}, ${task.task}`);
       currentProject = projectName;
+      currentTaskId = task.id;
       clearContent()
       TaskManager.showTask(this.dataList, projectName, task.id)
+      this.updateMenuBar()
     }
   },
+  retrieveData(project, taskID) {
+    return this.dataList[project].find(item => item.id === taskID)
+  }
 }
 
 setup.init(userDataAddress);
